@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AuthAPI from "../../api/AuthAPI";
 
 function NavnarMain() {
-  var fetchUserValue = useSelector((state) => state.user !== null);
+  var fetchUserValue = useSelector((state) => state.user == null);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   console.log(fetchUserValue);

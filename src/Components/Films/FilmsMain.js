@@ -6,10 +6,13 @@ import { addFavoriteMovie } from "../../store/slices/favoriteMovieSlice";
 import { addWatchMovie } from "../../store/slices/forWatchList";
 import { deleteWatchMovie } from "../../store/slices/forWatchList";
 import { deleteFavoriteMovies } from "../../store/slices/favoriteMovieSlice";
+import MovieAPI from "../../api/MovieAPI";
 
 function FilmsMain() {
-  const data = useSelector((state) => state.mert.data);
-  const isLoginValue = useSelector((state) => state.login.login);
+  const data = MovieAPI.getAllMovies();
+  //const data = useSelector((state) => state.movie);
+  console.log({ data });
+  const isLoginValue = useSelector((state) => state.login);
   const [SelectsValue, setSelectsValue] = useState({ year: "", genre: "" });
   const favorite = useSelector((state) => state.favorite.favoriteMovies);
   const watch = useSelector((state) => state.forwatch.watchMovies);
@@ -40,9 +43,9 @@ function FilmsMain() {
         NewData.filter((item) =>
           SelectsValue.genre !== "" && SelectsValue.year !== ""
             ? item.Category === SelectsValue?.genre &&
-            item.Part === SelectsValue?.year
+              item.Part === SelectsValue?.year
             : item.Category === SelectsValue?.genre ||
-            item.Part === SelectsValue?.year
+              item.Part === SelectsValue?.year
         )
       );
     }
@@ -90,19 +93,21 @@ function FilmsMain() {
                   <div className="w-1/2 h-10 mb-2 z-10 flex justify-center rounded-lg bg-black opacity-70  gap-4 sm:invisible  sm:group-hover:visible  ease-in-out duration-100 ">
                     <button onClick={() => addToFavoriteMovies(element)}>
                       <img
-                        className={` h-6 object-cover   rounded-2xl ${favorite && favorite.find((x) => x.Id === element.Id)
-                          ? "bg-[#B12403]"
-                          : "hover:bg-[#B12403]"
-                          }  `}
+                        className={` h-6 object-cover   rounded-2xl ${
+                          favorite && favorite.find((x) => x.Id === element.Id)
+                            ? "bg-[#B12403]"
+                            : "hover:bg-[#B12403]"
+                        }  `}
                         src={require("../../images/popcorn.png")}
                       />
                     </button>
                     <button onClick={() => addToForWatchMovies(element)}>
                       <img
-                        className={` h-6 object-cover   rounded-2xl ${watch && watch.find((x) => x.Id === element.Id)
-                          ? "bg-[#00b020]"
-                          : "hover:bg-[#00b020]"
-                          }  `}
+                        className={` h-6 object-cover   rounded-2xl ${
+                          watch && watch.find((x) => x.Id === element.Id)
+                            ? "bg-[#00b020]"
+                            : "hover:bg-[#00b020]"
+                        }  `}
                         src={require("../../images/eye.png")}
                       />
                     </button>
