@@ -8,7 +8,7 @@ import FavoriteMovies from "./Components/Profile/favoriteMovies";
 import FilmInfo from "./Components/FilmInfo/filmInfo";
 
 function Pages() {
-  const isLoginValue = useSelector((state) => state.login.login);
+  const isLoginValue = useSelector((state) => state.user !== null);
   return (
     <div>
       <Routes>

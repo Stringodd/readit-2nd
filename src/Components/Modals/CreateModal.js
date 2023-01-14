@@ -1,9 +1,10 @@
 import React, { useState, createContext, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { isLogin } from "../../store/slices/loginSlice";
+import { isLogin } from "../../store/slices/userSlice";
+import AuthAPI from "../../api/AuthAPI";
 
 function CreateModal(props) {
-  const isLoginValue = useSelector((state) => state.login.login);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   // usestate kısmı
   const [showModal, setShowModal] = useState(props.modal);
@@ -11,16 +12,17 @@ function CreateModal(props) {
   const [password, setPassword] = useState("");
   const [alert, setalert] = useState("invisible");
 
-  function isLoginFunction() {
+  async function isLoginFunction() {
     if (userName.length > 0 && password.length > 4) {
-      return (
-        console.log("aboo"),
-        localStorage.setItem("userName", userName),
-        localStorage.setItem("password", password),
-        localStorage.setItem("isLogin", true),
-        dispatch(isLogin(true)),
-        setShowModal(false)
-      );
+      const res = await AuthAPI.login(userName, password, true);
+
+      if (res.error) {
+        alert(`error: ${res.error}`);
+        return false;
+      }
+
+      window.location.href = "/";
+      return true;
     } else {
       setalert("visible");
     }
@@ -66,9 +68,7 @@ function CreateModal(props) {
                       ></input>
                     </div>
                     <div className="flex flex-col mx-6 ">
-                      <p className="text-[#dadee0] font-semibold pb-1">
-                        Şifre
-                      </p>
+                      <p className="text-[#dadee0] font-semibold pb-1">Şifre</p>
                       <input
                         type="password"
                         className="w-[250px] text-black  h-[40px] bg-[#ccddee] rounded-lg focus:bg-slate-100 pl-2"

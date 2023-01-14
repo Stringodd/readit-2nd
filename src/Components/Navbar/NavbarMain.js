@@ -1,19 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CreateModal from "../Modals/CreateModal";
-import { isLogin } from "../../store/slices/loginSlice";
+import { fetchUser } from "../../store/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import AuthAPI from "../../api/AuthAPI";
 
 function NavnarMain() {
-  const isLoginValue = useSelector((state) => state.login.login);
+  var fetchUserValue = useSelector((state) => state.user !== null);
   const dispatch = useDispatch();
-  const [modal, setmodal] = useState(false);
+  const [modal, setModal] = useState(false);
+  console.log(fetchUserValue);
 
   const isLoginFunction = () => {
     {
-      isLoginValue
-        ? dispatch(isLogin(false)) && localStorage.removeItem("isLogin")
-        : setmodal(!modal);
+      if (fetchUserValue) {
+        dispatch(fetchUser(false));
+        localStorage.removeItem("fetchUser");
+        AuthAPI.logout();
+      } else {
+        setModal(!modal);
+      }
     }
   };
 
@@ -26,7 +32,7 @@ function NavnarMain() {
         />
       </Link>
       <div className="text-[#d8e0e8] font-bold gap-4 sm:gap-0  flex flex-row justify-center  items-center sm:pr-12 h-full">
-        {isLoginValue && (
+        {fetchUserValue && (
           <Link to="/profile" className="hover:text-[#fefefe] sm:ml-6">
             PROFİL
           </Link>
@@ -41,7 +47,7 @@ function NavnarMain() {
           onClick={isLoginFunction}
           className="hover:text-[#fefefe]  sm:ml-6"
         >
-          {isLoginValue ? "ÇIKIŞ YAP" : "GİRİŞ YAP"}
+          {fetchUserValue ? "ÇIKIŞ YAP" : "GİRİŞ YAP"}
         </button>
         {modal && <CreateModal modal={modal} />}
       </div>

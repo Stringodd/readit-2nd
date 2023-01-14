@@ -7,7 +7,7 @@ import { deleteWatchMovie } from "../../store/slices/forWatchList";
 import { deleteFavoriteMovies } from "../../store/slices/favoriteMovieSlice";
 function PopularThıs() {
   const data = useSelector((state) => state.mert.data);
-  const isLoginValue = useSelector((state) => state.login.login);
+  const isLoginValue = useSelector((state) => state.user !== null);
   const favorite = useSelector((state) => state.favorite.favoriteMovies);
   const watch = useSelector((state) => state.forwatch.watchMovies);
   const dispatch = useDispatch();
@@ -48,19 +48,21 @@ function PopularThıs() {
                 <div className="w-3/5 h-10 mb-2 z-10 flex justify-center rounded-lg bg-black opacity-70  gap-4 sm:invisible  sm:group-hover:visible  ease-in-out duration-100 ">
                   <button onClick={() => addToFavoriteMovies(element)}>
                     <img
-                      className={` h-6 object-cover   rounded-2xl ${favorite && favorite.find((x) => x.Id === element.Id)
-                        ? "bg-[#B12403]"
-                        : "hover:bg-[#B12403]"
-                        }  `}
+                      className={` h-6 object-cover   rounded-2xl ${
+                        favorite && favorite.find((x) => x.Id === element.Id)
+                          ? "bg-[#B12403]"
+                          : "hover:bg-[#B12403]"
+                      }  `}
                       src={require("../../images/popcorn.png")}
                     />
                   </button>
                   <button onClick={() => addToForWatchMovies(element)}>
                     <img
-                      className={` h-6 object-cover   rounded-2xl ${watch && watch.find((x) => x.Id === element.Id)
-                        ? "bg-[#00b020]"
-                        : "hover:bg-[#00b020]"
-                        }  `}
+                      className={` h-6 object-cover   rounded-2xl ${
+                        watch && watch.find((x) => x.Id === element.Id)
+                          ? "bg-[#00b020]"
+                          : "hover:bg-[#00b020]"
+                      }  `}
                       src={require("../../images/eye.png")}
                     />
                   </button>
