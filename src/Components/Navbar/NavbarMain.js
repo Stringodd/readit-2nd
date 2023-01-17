@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CreateModal from "../Modals/CreateModal";
 import { fetchUser } from "../../store/slices/userSlice";
@@ -6,10 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import AuthAPI from "../../api/AuthAPI";
 
 function NavnarMain() {
-  var fetchUserValue = useSelector((state) => state.user == null);
+  const fetchUserValue = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
-  console.log(fetchUserValue);
 
   const isLoginFunction = () => {
     {

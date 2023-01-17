@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import UserAPI from "../../api/UserAPI";
 import errors from "../../api/errors";
 
-const initialState = null;
+const initialState = {
+  user: false,
+};
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
   try {
@@ -10,7 +12,7 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 
     let value = false;
     if (!errors.isError(response)) {
-      value = response.data;
+      value = response.data.data;
       console.log("fetchUser", response.data);
     }
 
@@ -26,14 +28,13 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 
 export const user = createSlice({
   name: "user",
-  initialState: initialState,
+  initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      // Add user to the state array
-      state = action.payload;
-    });
+  extraReducers: {
+    [fetchUser.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      console.log(state.user);
+    },
   },
 });
 

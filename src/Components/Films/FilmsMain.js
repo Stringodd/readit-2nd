@@ -7,18 +7,29 @@ import { addWatchMovie } from "../../store/slices/forWatchList";
 import { deleteWatchMovie } from "../../store/slices/forWatchList";
 import { deleteFavoriteMovies } from "../../store/slices/favoriteMovieSlice";
 import MovieAPI from "../../api/MovieAPI";
+import { fetchMovies } from "../../store/slices/movieSlice";
 
 function FilmsMain() {
-  const data = MovieAPI.getAllMovies();
+  const movies = useSelector((state) => state.movies.movies);
   //const data = useSelector((state) => state.movie);
-  console.log({ data });
-  const isLoginValue = useSelector((state) => state.login);
+  const fetchUserValue = useSelector((state) => state.user.user);
   const [SelectsValue, setSelectsValue] = useState({ year: "", genre: "" });
   const favorite = useSelector((state) => state.favorite.favoriteMovies);
   const watch = useSelector((state) => state.forwatch.watchMovies);
-  const [NewData, setNewData] = useState(data);
-  const [filterData, setFilterData] = useState(data);
+  //const [NewData, setNewData] = movies;
+  //const [filterData, setFilterData] = movies;
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovies())
+      .unwrap()
+      .then((result) => console.log("result: ", result))
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+  /*
   useEffect(() => {
     filter();
   }, [SelectsValue]);
@@ -68,54 +79,45 @@ function FilmsMain() {
       ? dispatch(deleteWatchMovie(element))
       : dispatch(addWatchMovie(element));
   };
+  */
   return (
-    <div className=" w-full h-full flex flex-col  ">
-      <div className="w-full  h-[102px] sm:h-[92px] bg-[#14181c]"></div>
-      <BrowseBy ChangeYear={YearSelectValue} FilmName={FilmName} />
-      <div className="w-full h-full pt-8  bg-[#1b2228] px-8 pb-8  grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6  ">
-        {filterData &&
-          filterData.map((element, key) => {
-            return (
+    <div className="w-full h-full flex justify-center items-center flex-col bg-[#1f252c]  ">
+      <div className=" w-full flex  h-[102px] sm:h-[92px] bg-[#14181c]"></div>
+      <div className="w-4/5 h-full  flex flex-row sm:flex-row justify-center items-center text-center  pt-10 pb-10 bg-[#1f252c]  ">
+        <div className="flex flex-col w-4/5 text-[#63707d] justify-center text-2xl mt-11 border-b-2 hover:text-[#613573] hover:border-[#613573] border-[#445566]">
+          <p>FILMLER</p>
+        </div>
+      </div>
+      <div>
+        {Array.isArray(movies) && movies.length !== 0 ? (
+          <div className="w-4/5 h-full mt-16  mb-16  grid grid-cols-2 sm:grid-cols-5 justify-center items-center ">
+            {movies.map((movie) => (
               <div
-                key={key}
-                className="  flex  justify-center items-end mb-6 gap-2  h-[16rem] xl:h-[18rem] object-cover    rounded-3xl  group  "
+                key={movie.id}
+                className="h-[16rem] xl:h-[18rem]  rounded-3xl mx-7 my-2 flex  flex-row justify-center group  "
               >
                 <Link
-                  className="absolute w-[9rem] h-[13rem] sm:w-[11rem]  sm:h-[16rem] xl:w-[13rem] xl:h-[18rem]"
-                  to={`/movie/${element.Id}`}
+                  className="absolute w-[9rem] h-[13rem] sm:w-[11rem]  sm:h-[16rem] xl:w-[13rem] xl:h-[18rem]  hover:text-[#613573]"
+                  to={`/movie/${movie.title}`}
                 >
-                  <img
-                    className="absolute w-[9rem] h-[13rem] sm:w-[11rem]  sm:h-[16rem] xl:w-[13rem] xl:h-[18rem] border-2 border-[#1b2228] hover:border-[#613573] rounded-3xl object-cover "
-                    src={require(`../../images/${element.img}`)}
-                  />
-                </Link>
-                {isLoginValue && (
-                  <div className="w-1/2 h-10 mb-2 z-10 flex justify-center rounded-lg bg-black opacity-70  gap-4 sm:invisible  sm:group-hover:visible  ease-in-out duration-100 ">
-                    <button onClick={() => addToFavoriteMovies(element)}>
-                      <img
-                        className={` h-6 object-cover   rounded-2xl ${
-                          favorite && favorite.find((x) => x.Id === element.Id)
-                            ? "bg-[#B12403]"
-                            : "hover:bg-[#B12403]"
-                        }  `}
-                        src={require("../../images/popcorn.png")}
-                      />
-                    </button>
-                    <button onClick={() => addToForWatchMovies(element)}>
-                      <img
-                        className={` h-6 object-cover   rounded-2xl ${
-                          watch && watch.find((x) => x.Id === element.Id)
-                            ? "bg-[#00b020]"
-                            : "hover:bg-[#00b020]"
-                        }  `}
-                        src={require("../../images/eye.png")}
-                      />
-                    </button>
+                  <div className="">
+                    <img
+                      className=" absolute w-[9rem] h-[13rem] sm:w-[11rem]  sm:h-[16rem] xl:w-[13rem] xl:h-[18rem] border-2 border-[#1b2228] hover:border-[#613573] rounded-3xl object-cover"
+                      src={
+                        movie.posterUrl
+                          ? movie.posterUrl
+                          : "../images/heart.png"
+                      }
+                    />
+                    <div>{movie.title}</div>
                   </div>
-                )}
+                </Link>
               </div>
-            );
-          })}
+            ))}
+          </div>
+        ) : (
+          <div>No movies</div>
+        )}
       </div>
     </div>
   );

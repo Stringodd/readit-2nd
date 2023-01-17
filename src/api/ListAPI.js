@@ -1,10 +1,11 @@
 import api from "./api";
 import errors from "./errors";
+import { useSelector } from "react-redux";
 
-const createList = async (profileid, listname) => {
+const createList = async (userid, listname) => {
   try {
     const res = await api.post("lists/create-list", {
-      profileid,
+      userid,
       listname,
     });
     console.log(res.data);
@@ -15,11 +16,11 @@ const createList = async (profileid, listname) => {
   }
 };
 
-const deleteList = async (listname, profileid) => {
+const deleteList = async (listname, userid) => {
   try {
     const res = await api.post("lists/create-list", {
       listname,
-      profileid,
+      userid,
     });
     console.log(res.data);
 
@@ -29,9 +30,9 @@ const deleteList = async (listname, profileid) => {
   }
 };
 
-const getAllLists = async (profileid) => {
+const getAllLists = async (userid) => {
   try {
-    const res = await api.get(`lists/all-lists`, { profileid });
+    const res = await api.post(`lists/all-lists`, { userid });
     console.log(res.data);
 
     return res;
@@ -40,9 +41,10 @@ const getAllLists = async (profileid) => {
   }
 };
 
-const currentList = async (listname, profileid) => {
+const currentList = async (id) => {
   try {
-    const res = await api.get("lists/list-current", { listname, profileid });
+    const res = await api.post("lists/list-current", { id });
+    console.log(id);
 
     return res;
   } catch (error) {
@@ -50,11 +52,11 @@ const currentList = async (listname, profileid) => {
   }
 };
 
-const addMovie = async (listname, profileid, title) => {
+const addMovie = async (listname, userid, title) => {
   try {
     const res = await api.post("lists/add-movie", {
       listname,
-      profileid,
+      userid,
       title,
     });
 
@@ -64,11 +66,11 @@ const addMovie = async (listname, profileid, title) => {
   }
 };
 
-const removeMovie = async (listname, profileid, title) => {
+const removeMovie = async (listname, userid, title) => {
   try {
     const res = await api.post("lists/remove-movie", {
       listname,
-      profileid,
+      userid,
       title,
     });
 
@@ -86,7 +88,3 @@ export default {
   addMovie,
   removeMovie,
 };
-
-//router.post("/create-list", authentication, listController.createList);
-
-//router.post("/delete-list", authentication, listController.deleteList);

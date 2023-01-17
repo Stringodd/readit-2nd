@@ -12,7 +12,7 @@ const getAllMovies = async () => {
 
 const movieInfo = async (title) => {
   try {
-    const res = await api.get("/movies/current-movie", { title });
+    const res = await api.post("/movies/current-movie", { title });
     return res;
   } catch (error) {
     return errors.errorHandler(error);

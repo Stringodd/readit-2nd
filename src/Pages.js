@@ -6,9 +6,11 @@ import Profile from "./Components/Profile/profile";
 import WatchList from "./Components/Profile/watchList";
 import FavoriteMovies from "./Components/Profile/favoriteMovies";
 import FilmInfo from "./Components/FilmInfo/filmInfo";
+import Lists from "./Components/Lists/Lists";
+import ListInfo from "./Components/Lists/ListInfo";
 
 function Pages() {
-  const isLoginValue = useSelector((state) => state.user !== null);
+  const fetchUserValue = useSelector((state) => state.user.user);
   return (
     <div>
       <Routes>
@@ -16,13 +18,16 @@ function Pages() {
 
         <Route path="/films" element={<FilmsMain />} />
 
-        <Route path="/movie/:id" element={<FilmInfo />} />
+        <Route path="/lists" element={<Lists />} />
+        <Route path="/lists/:id" element={<ListInfo />} />
 
-        {isLoginValue && <Route path="/profile" element={<Profile />} />}
-        {isLoginValue && (
+        <Route path="/movie/:title" element={<FilmInfo />} />
+
+        {fetchUserValue && <Route path="/profile" element={<Profile />} />}
+        {fetchUserValue && (
           <Route path="/favoritemovies" element={<FavoriteMovies />} />
         )}
-        {isLoginValue && <Route path="/watchlist" element={<WatchList />} />}
+        {fetchUserValue && <Route path="/watchlist" element={<WatchList />} />}
       </Routes>
     </div>
   );

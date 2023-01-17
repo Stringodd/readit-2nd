@@ -14,7 +14,12 @@ function App() {
   const favoritesFromLocalStorage = localStorage.getItem("favoriteMovies");
 
   useEffect(() => {
-    dispatch(fetchUser());
+    dispatch(fetchUser())
+      .unwrap()
+      .then((result) => console.log("result: ", result))
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
 
   return (
