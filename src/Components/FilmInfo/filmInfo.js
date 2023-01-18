@@ -6,6 +6,7 @@ import { addWatchMovie } from "../../store/slices/forWatchList";
 import { deleteWatchMovie } from "../../store/slices/forWatchList";
 import { deleteFavoriteMovies } from "../../store/slices/favoriteMovieSlice";
 import { fetchMovie } from "../../store/slices/singleMovieSlice";
+import ListAPI from "../../api/ListAPI";
 
 function FilmInfo() {
   const dispatch = useDispatch();
@@ -26,6 +27,11 @@ function FilmInfo() {
       });
   }, []);
 
+  //to test, fix to get listname, warn if its already in selected list
+  const addToList = (title) => {
+    ListAPI.addMovie("lastlist", fetchUserValue.uid, title);
+  };
+
   return (
     <div className="w-full h-full flex flex-col justify-center items-center text-center bg-[#1f252c]  ">
       <div className=" w-full h-[102px] sm:h-[92px] bg-[#14181c]"></div>
@@ -35,6 +41,13 @@ function FilmInfo() {
             className=" w-4/5  py-12 h-full  flex  flex-col sm:flex-row
         "
           >
+            {fetchUserValue && (
+              <div>
+                <button onClick={() => addToList(current.title)}>
+                  Listeye ekle
+                </button>
+              </div>
+            )}
             <div className="sm:w-1/3 w-full flex justify-center items-start">
               <img
                 className="  w-[16rem]  h-[24rem] border-[#33394b] rounded-lg border-2  object-cover"

@@ -9,12 +9,33 @@ import { fetchUser } from "./store/slices/userSlice";
 import { addFavoriteMovie } from "./store/slices/favoriteMovieSlice";
 
 import Pages from "./Pages";
+import { fetchWatchlist } from "./store/slices/watchlistSlice";
+import { fetchFavorites } from "./store/slices/favoritesSlice";
+import { fetchMovies } from "./store/slices/movieSlice";
 function App() {
   const dispatch = useDispatch();
   const favoritesFromLocalStorage = localStorage.getItem("favoriteMovies");
 
   useEffect(() => {
     dispatch(fetchUser())
+      .unwrap()
+      .then((result) => console.log("result: ", result))
+      .catch((e) => {
+        console.log(e);
+      });
+    dispatch(fetchFavorites())
+      .unwrap()
+      .then((result) => console.log("result: ", result))
+      .catch((e) => {
+        console.log(e);
+      });
+    dispatch(fetchWatchlist())
+      .unwrap()
+      .then((result) => console.log("result: ", result))
+      .catch((e) => {
+        console.log(e);
+      });
+    dispatch(fetchMovies())
       .unwrap()
       .then((result) => console.log("result: ", result))
       .catch((e) => {

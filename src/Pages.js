@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import FilmsMain from "./Components/Films/FilmsMain";
 import HomePage from "./Components/HomePage/HomePage";
 import Profile from "./Components/Profile/profile";
-import WatchList from "./Components/Profile/watchList";
+import Watchlist from "./Components/Watchlist/Watchlist";
 import FavoriteMovies from "./Components/Profile/favoriteMovies";
 import FilmInfo from "./Components/FilmInfo/filmInfo";
 import Lists from "./Components/Lists/Lists";
 import ListInfo from "./Components/Lists/ListInfo";
+import Favorites from "./Components/Favorites/Favorites";
 
 function Pages() {
   const fetchUserValue = useSelector((state) => state.user.user);
@@ -24,10 +25,9 @@ function Pages() {
         <Route path="/movie/:title" element={<FilmInfo />} />
 
         {fetchUserValue && <Route path="/profile" element={<Profile />} />}
-        {fetchUserValue && (
-          <Route path="/favoritemovies" element={<FavoriteMovies />} />
-        )}
-        {fetchUserValue && <Route path="/watchlist" element={<WatchList />} />}
+
+        <Route path="/favoritemovies" element={<Favorites />} />
+        <Route path="/Watchlist" element={<Watchlist />} />
       </Routes>
     </div>
   );

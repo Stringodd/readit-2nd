@@ -3,16 +3,12 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchList } from "../../store/slices/singleListSlice";
-import { Link } from "react-router-dom";
-import ListAPI from "../../api/ListAPI";
-import { addFavoriteMovie } from "../../store/slices/favoriteMovieSlice";
-import { addWatchMovie } from "../../store/slices/forWatchList";
-import { deleteWatchMovie } from "../../store/slices/forWatchList";
-import { deleteFavoriteMovies } from "../../store/slices/favoriteMovieSlice";
 import favoritesAPI from "../../api/favoritesAPI";
 import { fetchFavorites } from "../../store/slices/favoritesSlice";
 import { fetchWatchlist } from "../../store/slices/watchlistSlice";
-import watchlistAPI from "../../api/watchlistAPI";
+import ListAPI from "../../api/ListAPI";
+import Movie from "../Films/Movie";
+import Pagination from "../Films/Pagination";
 
 function ListInfo() {
   const dispatch = useDispatch();
@@ -22,7 +18,7 @@ function ListInfo() {
   var favorites = useSelector((state) => state.favorites.favorites);
   var watchlist = useSelector((state) => state.watchlist.watchlist);
   const listid = id.toString();
-
+  console.log(current.listname);
   useEffect(() => {
     dispatch(fetchList(listid))
       .unwrap()
@@ -50,25 +46,17 @@ function ListInfo() {
       });
   }, []);
 
-  const addToFavoriteMovies = (movie) => {
-    if (favorites && favorites.includes(movie)) {
-      favoritesAPI.deleteFavorite(movie, fetchUserValue.uid);
-      favorites = favorites.filter((title) => title !== movie);
-    } else {
-      favoritesAPI.addFavorite(movie, fetchUserValue.uid);
-      favorites = [...favorites, movie];
-    }
-  };
+  async function deleteList(listname) {
+    const res = await ListAPI.deleteList(listname, fetchUserValue.uid);
 
-  const addToWatchlist = (movie) => {
-    if (watchlist && watchlist.includes(movie)) {
-      watchlistAPI.deleteFromWatchlist(movie, fetchUserValue.uid);
-      watchlist = watchlist.filter((title) => title !== movie);
-    } else {
-      watchlistAPI.addToWatchlist(movie, fetchUserValue.uid);
-      watchlist = [...watchlist, movie];
+    if (res.error) {
+      alert(`error: ${res.error}`);
+      return false;
     }
-  };
+
+    window.location.href = "/lists";
+    return true;
+  }
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center text-center bg-[#1f252c]  ">
@@ -79,6 +67,12 @@ function ListInfo() {
             className=" w-4/5  py-12 h-full  flex  flex-col sm:flex-row
         "
           >
+            {fetchUserValue && (
+              <button onClick={() => deleteList(current.listname)}>
+                Listeyi Sil
+              </button>
+            )}
+
             <div className="sm:w-1/3 w-full flex justify-center items-start">
               <img
                 className="  w-[16rem]  h-[24rem] border-[#33394b] rounded-lg border-2  object-cover"
@@ -108,47 +102,13 @@ function ListInfo() {
                 {Array.isArray(current.movies) &&
                 current.movies.length !== 0 ? (
                   <div className="w-4/5 h-full mt-16  mb-16  grid grid-cols-2 sm:grid-cols-5 justify-center items-center ">
-                    {current.movies.map((movie) => (
-                      <div
-                        key={movie.title}
-                        className="h-[16rem] xl:h-[18rem]  rounded-3xl mx-7 my-2 flex  flex-row justify-center group  "
-                      >
-                        <Link
-                          className="absolute w-[9rem] h-[13rem] sm:w-[11rem]  sm:h-[16rem] xl:w-[13rem] xl:h-[18rem]  hover:text-[#613573]"
-                          to={`/movie/${movie.title}`}
-                        >
-                          <div className="">
-                            <img
-                              className=" absolute w-[9rem] h-[13rem] sm:w-[11rem]  sm:h-[16rem] xl:w-[13rem] xl:h-[18rem] border-2 border-[#1b2228] hover:border-[#613573] rounded-3xl object-cover"
-                              src={
-                                movie.posterUrl
-                                  ? movie.posterUrl
-                                  : "../images/heart.png"
-                              }
-                            />
-                            <div>{movie.title}</div>
-                          </div>
-                        </Link>
-                        {fetchUserValue && (
-                          <div className=" h-10 mb-2 z-10  rounded-lg bg-black opacity-70  sm:invisible  sm:group-hover:visible  ease-in-out duration-100  ">
-                            <button
-                              onClick={() => addToFavoriteMovies(movie.title)}
-                            >
-                              <img
-                                className={` h-6 object-cover   rounded-2xl bg-[#B12403] hover:bg-[#B12403]}`}
-                                src={require("../../images/popcorn.png")}
-                              />
-                            </button>
-                            <button onClick={() => addToWatchlist(movie.title)}>
-                              <img
-                                className={" h-6 object-cover   rounded-2xl "}
-                                src={require("../../images/eye.png")}
-                              />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                    <Pagination
+                      data={current.movies}
+                      RenderComponent={Movie}
+                      title="Movies"
+                      pageLimit={5}
+                      dataLimit={20}
+                    />
                   </div>
                 ) : (
                   <div>No movies</div>

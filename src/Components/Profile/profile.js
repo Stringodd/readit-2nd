@@ -13,6 +13,7 @@ function Profile() {
   const watchlist = useSelector((state) => state.watchlist.watchlist);
   const dispatch = useDispatch();
   console.log(useSelector((state) => state.favorites.favorites));
+
   useEffect(() => {
     dispatch(fetchFavorites())
       .unwrap()
@@ -83,10 +84,10 @@ function Profile() {
             LISTELER
           </button>
         </Link>
-        <Link to="/watchlist">
+        <Link to="/Watchlist">
           <button className="font-bold  text-[#fffffe]  font-sans opacity-60 hover:text-[#613573] hover:opacity-100 ">
             {" "}
-            İZLEME LİSTEMDEKİLER
+            İZLEME LİSTESI
           </button>
         </Link>
       </div>
