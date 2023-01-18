@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.786e23f1.css",
-    "main.js": "/static/js/main.ca3e9b07.js",
+    "main.css": "/static/css/main.c0b09cd6.css",
+    "main.js": "/static/js/main.b514cfcc.js",
     "static/media/Mandalorian.jpg": "/static/media/Mandalorian.13b4e4f75d4ef6610ac4.jpg",
     "static/media/Scarface.jpg": "/static/media/Scarface.06516c3e58304020787c.jpg",
     "static/media/LOTR.jpg": "/static/media/LOTR.4ae003b526c44a65e878.jpg",
@@ -37,7 +37,7 @@
     "static/media/44.jpg": "/static/media/44.942ee4803f32bf9bd42a.jpg",
     "static/media/18.jpg": "/static/media/18.96073cf35bdc4fc6aae2.jpg",
     "static/media/81.jpg": "/static/media/81.a2e624b3af897d462a7b.jpg",
-    "static/media/17.jpg": "/static/media/17.3e565a49d2bb73a7d1e5.jpg",
+    "static/media/The Lion King.jpg": "/static/media/The Lion King.3e565a49d2bb73a7d1e5.jpg",
     "static/media/16.jpg": "/static/media/16.ef2f5e3c92b492955292.jpg",
     "static/media/56.jpg": "/static/media/56.4cded27ccee67c30bfe5.jpg",
     "static/media/80.jpg": "/static/media/80.ed6d711700e7b73c86ad.jpg",
@@ -51,7 +51,7 @@
     "static/media/79.jpg": "/static/media/79.761abc2ebb9f23f531ed.jpg",
     "static/media/94.jpg": "/static/media/94.988fccade748befd2837.jpg",
     "static/media/53.jpg": "/static/media/53.5369b0d2e8509a272d90.jpg",
-    "static/media/9.jpg": "/static/media/9.ced4ac71ce182504c62b.jpg",
+    "static/media/Parasite.jpg": "/static/media/Parasite.ced4ac71ce182504c62b.jpg",
     "static/media/24.jpg": "/static/media/24.5ecd2353a98694d480ac.jpg",
     "static/media/86.jpg": "/static/media/86.4feb4d6e405dc17207cc.jpg",
     "static/media/84.jpg": "/static/media/84.98d2f01ffbe4dbaf7e14.jpg",
@@ -114,11 +114,11 @@
     "static/media/3.jpg": "/static/media/3.610d24732364873bd6f7.jpg",
     "static/media/7.jpg": "/static/media/7.5e522f17d9dec79b8cd0.jpg",
     "index.html": "/index.html",
-    "main.786e23f1.css.map": "/static/css/main.786e23f1.css.map",
-    "main.ca3e9b07.js.map": "/static/js/main.ca3e9b07.js.map"
+    "main.c0b09cd6.css.map": "/static/css/main.c0b09cd6.css.map",
+    "main.b514cfcc.js.map": "/static/js/main.b514cfcc.js.map"
   },
   "entrypoints": [
-    "static/css/main.786e23f1.css",
-    "static/js/main.ca3e9b07.js"
+    "static/css/main.c0b09cd6.css",
+    "static/js/main.b514cfcc.js"
   ]
 }
