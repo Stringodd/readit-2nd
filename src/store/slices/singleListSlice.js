@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ListAPI from "../../api/ListAPI";
 import errors from "../../api/errors";
-import { useSelector } from "react-redux";
-import UserAPI from "../../api/UserAPI";
 
 const initialState = {
   list: false,

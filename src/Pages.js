@@ -4,7 +4,6 @@ import FilmsMain from "./Components/Films/FilmsMain";
 import HomePage from "./Components/HomePage/HomePage";
 import Profile from "./Components/Profile/profile";
 import Watchlist from "./Components/Watchlist/Watchlist";
-import FavoriteMovies from "./Components/Profile/favoriteMovies";
 import FilmInfo from "./Components/FilmInfo/filmInfo";
 import Lists from "./Components/Lists/Lists";
 import ListInfo from "./Components/Lists/ListInfo";

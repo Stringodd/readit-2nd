@@ -1,0 +1,13 @@
+.stars {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 3rem;
+  }
+  .on {
+    color: rgb(252, 178, 20);
+  }
+  .off {
+    color: rgb(141, 141, 141);
+  }

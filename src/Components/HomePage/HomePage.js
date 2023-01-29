@@ -27,7 +27,8 @@ function HomePage() {
         ></div>
       </div>
       <div className=" w-3/4  relative  leading-normal flex justify-center  text-white text-center font-bold text-5xl  ">
-        İzlediğin filmleri ister takip et ister oyla istersen de puanla. Filmleri kaydedebilir ve listelerine ekleyebilirsin.
+        İzlediğin filmleri ister takip et ister oyla istersen de puanla.
+        Filmleri kaydedebilir ve listelerine ekleyebilirsin.
       </div>
       <div className=" w-full h-[9rem] flex flex-col  justify-center  items-center ">
         <Link to="/films">
@@ -36,7 +37,6 @@ function HomePage() {
           </button>
         </Link>
       </div>
-      <PopularThıs />
     </div>
   );
 }

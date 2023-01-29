@@ -34,7 +34,7 @@ function NavnarMain() {
     <div className="w-full h-[92px] flex flex-col  sm:flex-row absolute z-10 justify-center  sm:justify-between  items-center  ">
       <Link to="/">
         <img
-          className=" sm:ml-10 lg:w-[100px] h-[95px]  object-fill "
+          className=" sm:ml-10 lg:w-[5rem] h-[5rem]  object-fill "
           src={require("../../../src/images/movie.png")}
         />
       </Link>

@@ -33,8 +33,8 @@ function Watchlist() {
   return (
     <div className="w-full h-full flex justify-center items-center flex-col bg-[#1f252c]  ">
       <div className=" w-full flex  h-[102px] sm:h-[92px] bg-[#14181c]"></div>
-      <div>
-        <div className="w-full h-full bg-[#1b2228] flex flex-col sm:flex-row justify-center sm:justify-between items-center p-20">
+      <div className="w-full">
+        <div className="w-full h-full bg-[#1b2228] flex flex-col sm:flex-row justify-center sm:justify-between items-center p-10">
           <div className="  flex flex-col sm:flex-row text-lg  text-[#899aa9] ">
             <div className="border-2 sm:mt-0 mt-4 border-[#232a31] flex text-center  sm:ml-4"></div>
           </div>
@@ -55,13 +55,13 @@ function Watchlist() {
       {user ? (
         <div>
           {Array.isArray(movies) && movies.length !== 0 ? (
-            <div className="w-4/5 h-full mt-16  mb-16  grid grid-cols-2 sm:grid-cols-5 justify-center items-center ">
+            <div>
               <Pagination
                 data={movies}
                 RenderComponent={Movie}
                 title="Movies"
                 pageLimit={5}
-                dataLimit={20}
+                dataLimit={18}
               />
             </div>
           ) : (

@@ -1,0 +1,84 @@
+.movie{
+    height: 16rem ;
+    width: 3rem;
+    border-radius: 1.5rem; /* 24px */
+    margin-right: 8rem;
+    margin-left: 7rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.container{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 11rem;
+    height: 16rem;
+    
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+    border-radius: 1.5rem; }
+    
+
+.container:hover .overlay{
+    display: block;
+    background: linear-gradient(0deg,#000000 0,rgba(0,0,0,.986) 15.92833333%,rgba(0,0,0,0.7) 56.87777778%,rgba(0,0,0,0.2) 90%);
+}
+
+.title {
+    position: absolute;
+    width: 90%;
+    left: 6%;
+    bottom: 20%;
+    font-weight: 100rem;
+    font-size: 1.3rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0);
+    z-index: 1;
+    transition: bottom .5s ease;
+    transition: color .5 ease;
+  }
+  
+  
+.container:hover .title {
+    bottom: 90px;
+    color: rgba(255, 255, 255, 1)
+   
+  }
+
+  
+.buttonContainer {
+    position: absolute;
+    width: 100%;
+    bottom: 10%;
+    opacity: 0;
+    transition: opacity .35s ease;
+    border-radius: 1rem;
+    display: flex;
+    flex-flow: row;
+    align-content: center;    
+  }
+  
+  .buttonContainer a {
+    width: 200px;
+    padding: 12px 48px;
+    text-align: center;
+    color: white;
+    border: solid 2px white;
+    z-index: 1;
+   } 
+  
+  .container:hover .buttonContainer {
+    opacity: 1;
+  }
+  

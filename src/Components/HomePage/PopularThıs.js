@@ -1,17 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { addFavoriteMovie } from "../../store/slices/favoriteMovieSlice";
-import { addWatchMovie } from "../../store/slices/forWatchList";
-import { deleteWatchMovie } from "../../store/slices/forWatchList";
-import { deleteFavoriteMovies } from "../../store/slices/favoriteMovieSlice";
+
 function PopularThıs() {
   const data = useSelector((state) => state.mert.data);
   const isLoginValue = useSelector((state) => state.user !== null);
   const favorite = useSelector((state) => state.favorite.favoriteMovies);
   const watch = useSelector((state) => state.forwatch.watchMovies);
   const dispatch = useDispatch();
-
+  /*
   const addToFavoriteMovies = (element) => {
     favorite && favorite.find((x) => x.Id === element.Id)
       ? dispatch(deleteFavoriteMovies(element))
@@ -22,7 +19,7 @@ function PopularThıs() {
     watch && watch.find((x) => x.Id === element.Id)
       ? dispatch(deleteWatchMovie(element))
       : dispatch(addWatchMovie(element));
-  };
+  };*/
   return (
     <div className="w-full h-full bg-[#14181c] flex justify-center items-center flex-col">
       <div className="flex flex-col w-4/5 text-[#63707d]  mt-15 border-b-2 hover:text-[#613573] hover:border-[#613573] border-[#445566]">
@@ -46,7 +43,7 @@ function PopularThıs() {
               </Link>
               {isLoginValue && (
                 <div className="w-3/5 h-10 mb-2 z-10 flex justify-center rounded-lg bg-black opacity-70  gap-4 sm:invisible  sm:group-hover:visible  ease-in-out duration-100 ">
-                  <button onClick={() => addToFavoriteMovies(element)}>
+                  <button>
                     <img
                       className={` h-6 object-cover   rounded-2xl ${
                         favorite && favorite.find((x) => x.Id === element.Id)
@@ -56,7 +53,7 @@ function PopularThıs() {
                       src={require("../../images/popcorn.png")}
                     />
                   </button>
-                  <button onClick={() => addToForWatchMovies(element)}>
+                  <button>
                     <img
                       className={` h-6 object-cover   rounded-2xl ${
                         watch && watch.find((x) => x.Id === element.Id)

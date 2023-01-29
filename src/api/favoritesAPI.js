@@ -37,8 +37,21 @@ const deleteFavorite = async (title, userId) => {
   }
 };
 
+const isFavorite = async (title, userid) => {
+  try {
+    const res = await api.post("favorite/isFavorite", {
+      title,
+      userid,
+    });
+    return res.data.data;
+  } catch (error) {
+    return errors.errorHandler(error);
+  }
+};
+
 export default {
   getFavorites,
   addFavorite,
   deleteFavorite,
+  isFavorite,
 };

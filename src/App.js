@@ -6,7 +6,6 @@ import NavbarMain from "./Components/Navbar/NavbarMain";
 import Footer from "./Components/Footer/Footer";
 import CreateModal from "./Components/Modals/CreateModal";
 import { fetchUser } from "./store/slices/userSlice";
-import { addFavoriteMovie } from "./store/slices/favoriteMovieSlice";
 
 import Pages from "./Pages";
 import { fetchWatchlist } from "./store/slices/watchlistSlice";
@@ -18,24 +17,6 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUser())
-      .unwrap()
-      .then((result) => console.log("result: ", result))
-      .catch((e) => {
-        console.log(e);
-      });
-    dispatch(fetchFavorites())
-      .unwrap()
-      .then((result) => console.log("result: ", result))
-      .catch((e) => {
-        console.log(e);
-      });
-    dispatch(fetchWatchlist())
-      .unwrap()
-      .then((result) => console.log("result: ", result))
-      .catch((e) => {
-        console.log(e);
-      });
-    dispatch(fetchMovies())
       .unwrap()
       .then((result) => console.log("result: ", result))
       .catch((e) => {

@@ -37,8 +37,22 @@ const deleteFromWatchlist = async (title, userId) => {
   }
 };
 
+const inWatchlist = async (title, userid) => {
+  try {
+    const res = await api.post("watchlist/inWatchlist", {
+      title,
+      userid,
+    });
+
+    return res.data.data;
+  } catch (error) {
+    return errors.errorHandler(error);
+  }
+};
+
 export default {
   getWatchlist,
   addToWatchlist,
   deleteFromWatchlist,
+  inWatchlist,
 };

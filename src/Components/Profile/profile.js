@@ -92,7 +92,7 @@ function Profile() {
         </Link>
       </div>
       <div className="flex flex-col w-4/5 text-[#63707d]  mt-11 border-b-2 hover:text-[#613573] hover:border-[#613573] border-[#445566]">
-        <p>BU HAFTA BEĞENEBİLECEKLERİN</p>
+        <p></p>
       </div>
       <div className="w-4/5 h-full mt-16  mb-16  grid grid-cols-2 sm:grid-cols-5 justify-center items-center "></div>
     </div>
